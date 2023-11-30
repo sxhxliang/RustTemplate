@@ -1,0 +1,67 @@
+[package]
+name = "agentx"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# tracing.workspace = true
+
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+authors = ["Shihua Liang <sxhxliang@gmail.com>"]
+edition = "2021"
+homepage = "https://github.com/sxhxliang"
+# include = ["../../LICENSE-APACHE", "../../LICENSE-MIT", "**/*.rs", "Cargo.toml"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/sxhxliang"
+rust-version = "1.74"
+version = "0.1.0"
+
+default-members = [
+    "projects/sub_projects",
+]
+exclude = [
+    "projects/.DS_Store",
+]
+
+[workspace.dependencies]
+# serde = { version = "1.0", features = ["derive"] }
+# serde_json = "1.0"
+
+# futures ="0.3"
+# anyhow = "1.0"
+
+# lazy_static = "1.4.0"
+# async-trait = "0.1.73"
+# tokio = { version = "1", features = ["full"] }
+
+# tracing = "0.1"
+# tracing-appender = "0.2"
+# tracing-subscriber = { version = "0.3", features = ["local-time"] }
+
+# clap = { version = "4.4", features = ["derive"] }
+# dotenv = "0.15.0"
+# reqwest = {version = "0.11", features = ["blocking"]}
+# uuid = {version = "1", features = ["v4", "fast-rng", "macro-diagnostics"]}
+
+[profile.release]
+# https://github.com/johnthagen/min-sized-rust
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z"  # Optimize for size.
+codegen-units = 1
+lto = true
+panic = "abort"
+
+# When using alpha-release, always use exact version, e.g. `version = "=0.x.y-alpha.z"
+# This is because we treat alpha-releases as incompatible, but semver doesn't.
+# In particular: if we compile project we only want it to use
+
+[profile.dev]
+opt-level = 1
+[profile.dev.package."*"]
+opt-level = 3
